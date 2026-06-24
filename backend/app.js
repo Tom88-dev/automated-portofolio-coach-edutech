@@ -6,11 +6,18 @@ const sequelize = require('./config/database');
 // Import Models
 const User = require('./models/User');
 const Progress = require('./models/Progress');
+const Project = require('./models/Project');
 const Portfolio = require('./models/Portfolio');
+
+// Import Routes
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
 app.use(express.json());
+
+// Auth Routes
+app.use('/api/auth', authRoutes);
 
 /* =========================
    RELASI ANTAR TABEL
@@ -23,6 +30,17 @@ User.hasMany(Progress, {
 });
 
 Progress.belongsTo(User, {
+  foreignKey: 'userId',
+  as: 'user',
+});
+
+// User -> Project (One to Many)
+User.hasMany(Project, {
+  foreignKey: 'userId',
+  as: 'projects',
+});
+
+Project.belongsTo(User, {
   foreignKey: 'userId',
   as: 'user',
 });
