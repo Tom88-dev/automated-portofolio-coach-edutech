@@ -13,6 +13,7 @@ const Portfolio = require('./models/Portfolio');
 const authRoutes = require('./routes/authRoutes');
 const progressRoutes = require('./routes/progressRoutes');
 const projectRoutes = require('./routes/projectRoutes');
+const portfolioRoutes = require('./routes/portfolioRoutes');
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/progress', progressRoutes);
 app.use('/api/projects', projectRoutes);
+app.use('/api/portfolio', portfolioRoutes);
 
 /* =========================
    RELASI ANTAR TABEL
